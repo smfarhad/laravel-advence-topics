@@ -2,7 +2,10 @@
 
 use App\Postcard;
 use App\PostcardSendingService;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,4 +32,10 @@ Route::get('/postcards', function () {
 
 Route::get('/facades', function () {
     Postcard::hello('Hello from Facade', 'test@test.com');
+});
+
+Route::get('/macros', function () {
+    //return Str::prefix(111111, 'ABCD -');
+    return Str::partNumber(111111);
+    return Response::errorJson('A huge error message occured: BOO');
 });
