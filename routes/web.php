@@ -2,10 +2,13 @@
 
 use App\Postcard;
 use App\PostcardSendingService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\LazyCollection;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,4 +42,21 @@ Route::get('/macros', function () {
     //return Str::prefix(111111, 'ABCD -');
     return Str::partNumber(111111);
     return Response::errorJson('A huge error message occured: BOO');
+});
+
+//Route::resource('/customers',  'CustomersController');
+Route::get('/customers/',  'CustomersController@index');
+Route::get('/customers/{customerId}',  'CustomersController@show');
+Route::get('/customers/{customerId}/update',  'CustomersController@update');
+Route::get('/customers/{customerId}/delete',  'CustomersController@destroy');
+
+Route::get('lazy', function () {
+    // $collection = Collection::times(10000000)->map(function ($number) {
+    //     return pow(2, $number);
+    // })->all();
+    // return 'done';
+    $collection = LazyCollection::times(10000000)->map(function ($number) {
+        return pow(2, $number);
+    })->all();
+    return 'done';
 });

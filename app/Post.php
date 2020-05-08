@@ -7,11 +7,12 @@ use Illuminate\Pipeline\Pipeline;
 use App\QueryFilter\Active;
 use App\QueryFilter\Sort;
 use App\QueryFilter\MaxCount;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-
     protected $guarded = [];
+    use SoftDeletes;
     public static function allPost()
     {
         return app(Pipeline::class)
